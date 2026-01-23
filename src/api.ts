@@ -20,4 +20,12 @@ api.interceptors.request.use(async (config) => {
   return config;
 });
 
+// src/api.ts
+export const sendOtp = (phone: string) =>
+  api.post('/send-otp', { phone });
+
+export const verifyOtp = (phone: string, otp: string) =>
+  api.post('/verify-otp', { phone, otp });
+
+
 export default api;
