@@ -13,7 +13,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { sendOtp, verifyOtp } from '../api';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/AppNavigator';
+import { RootStackParamList } from '../navigation/types';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
@@ -43,20 +43,33 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const handleVerifyOtp = async () => {
-    if (!otp) return Alert.alert('Error', 'Enter OTP');
+    if (!otp) {
+      return Alert.alert('Error', 'Please enter OTP');
+    }
+  
     try {
       setLoading(true);
-      const res = await verifyOtp(phone, otp);
+  
+      // Optional: clean phone number
+      const cleanedPhone = phone.replace(/\D/g, '');
+  
+      const res = await verifyOtp(cleanedPhone, otp);
+  
       await AsyncStorage.setItem('token', res.data.token);
-
-      // If name/email missing, go to CompleteProfile
-      if (!res.data.user.name || !res.data.user.email) {
-        navigation.replace('CompleteProfile');
+  
+      // Go to profile if name or email is missing
+      if (!res.data.user?.name || !res.data.user?.email) {
+        navigation.replace('CompleteProfile', undefined);
       } else {
-        navigation.replace('Home');
+        console.log("Login success – replacing to Main now");
+        navigation.replace('Main');
+        console.log("replace called – should have navigated");
       }
     } catch (err: any) {
-      Alert.alert('Error', err.response?.data?.message || 'Invalid OTP');
+      Alert.alert(
+        'Error',
+        err.response?.data?.message || 'Invalid OTP. Please try again.'
+      );
     } finally {
       setLoading(false);
     }

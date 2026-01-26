@@ -1,33 +1,45 @@
+// src/navigation/AppNavigator.tsx
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
 
 import LoginScreen from '../screens/LoginScreen';
-import HomeScreen from '../screens/HomeScreen';
 import CompleteProfileScreen from '../screens/CompleteProfileScreen';
+import AdminDrawer from './AdminDrawer';
 
-export type RootStackParamList = {
-  Login: undefined;
-  CompleteProfile: undefined;
-  Home: undefined;
-};
+import { RootStackParamList } from './types';   // assuming types.ts exists in same folder
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const AppNavigator = () => {
+function AppNavigator() {
   return (
       <Stack.Navigator
         initialRouteName="Login"
-        screenOptions={{ headerShown: false }}
+        screenOptions={{
+          headerShown: false,
+          animation: 'fade_from_bottom',     // smoother feel on most Android devices
+          gestureEnabled: false,              // prevent swipe-back on auth screens (optional but common)
+        }}
       >
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen
-          name="CompleteProfile"
-          component={CompleteProfileScreen}
+        <Stack.Screen 
+          name="Login" 
+          component={LoginScreen} 
         />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        
+        <Stack.Screen 
+          name="CompleteProfile" 
+          component={CompleteProfileScreen} 
+          options={{
+            // Optional: allow hardware back button to go back to login
+            gestureEnabled: true,
+          }}
+        />
+
+        <Stack.Screen 
+          name="Main" 
+          component={AdminDrawer} 
+        />
       </Stack.Navigator>
   );
-};
+}
 
 export default AppNavigator;
