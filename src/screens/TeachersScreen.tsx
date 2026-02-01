@@ -5,7 +5,7 @@ import { View, Text } from 'react-native';
 export default function TeachersScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Students Management Screen (under development)</Text>
+      <Text>Teacher Management Screen (under development)</Text>
     </View>
   );
 }
