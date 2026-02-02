@@ -6,6 +6,10 @@ import LoginScreen from '../screens/LoginScreen';
 import CompleteProfileScreen from '../screens/CompleteProfileScreen';
 import AdminDrawer from './AdminDrawer';
 
+import UserListScreen from '../screens/UserListScreen';
+import UserDetailsScreen from '../screens/UserDetailsScreen';
+
+import Header from '../components/Header';
 import { RootStackParamList } from './types';   // assuming types.ts exists in same folder
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -38,7 +42,24 @@ function AppNavigator() {
           name="Main" 
           component={AdminDrawer} 
         />
+    
+      <Stack.Screen
+          name="UserDetails"
+          component={UserDetailsScreen}
+          options={({ navigation, route }) => ({
+            headerShown: true,
+            header: () => (
+              <Header
+                title="User Details"
+                onBackPress={() => navigation.goBack()}
+              />
+            ),
+          })}
+        />
+
       </Stack.Navigator>
+
+      
   );
 }
 

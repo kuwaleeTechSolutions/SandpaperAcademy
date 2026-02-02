@@ -9,6 +9,7 @@ import AttendanceScreen from '../screens/AttendanceScreen';
 import ExamsScreen from '../screens/ExamsScreen';
 import FeesScreen from '../screens/FeesScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import UserListScreen from '../screens/UserListScreen';
 
 import Header from '../components/Header';
 import { AdminDrawerParamList } from './types';
@@ -30,6 +31,7 @@ export default function AdminDrawer() {
       <Drawer.Screen name="Attendance" component={AttendanceScreen} options={{ title: 'Attendance' }} />
       <Drawer.Screen name="Exams" component={ExamsScreen} options={{ title: 'Exams & Results' }} />
       <Drawer.Screen name="Fees" component={FeesScreen} options={{ title: 'Fees & Payments' }} />
+      <Drawer.Screen name="UserList" component={UserListScreen} options={{ title: 'User List' }} />
       <Drawer.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
     </Drawer.Navigator>
   );

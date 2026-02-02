@@ -74,7 +74,7 @@ const StudentsScreen: React.FC = () => {
       return;
     }
 
-    if (!form.alt_email || !validateEmail(form.alt_email)) {
+    if (form.alt_email && !validateEmail(form.alt_email)) {
       Alert.alert('Validation Error', 'Valid email is required');
       return;
     }
@@ -183,7 +183,7 @@ const StudentsScreen: React.FC = () => {
 
         <TextInput
           style={styles.input}
-          placeholder="Email *"
+          placeholder="Email (optional)"
           keyboardType="email-address"
           value={form.alt_email}
           onChangeText={(v) => handleChange('alt_email', v)}
