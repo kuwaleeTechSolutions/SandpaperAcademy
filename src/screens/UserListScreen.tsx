@@ -113,14 +113,7 @@ const UserListScreen: React.FC<any> = ({ navigation }) => {
                 />
               </View>
 
-              <TouchableOpacity
-                style={styles.editBtn}
-                onPress={() =>
-                  navigation.navigate('EditUser', { id: user.id })
-                }
-              >
-                <Text style={styles.editText}>Edit</Text>
-              </TouchableOpacity>
+            
             </View>
           </TouchableOpacity>
         ))
@@ -206,21 +199,7 @@ const styles = StyleSheet.create({
     marginRight: 6,
     color: '#333',
   },
-
-  editBtn: {
-    marginTop: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#0d6efd',
-  },
-
-  editText: {
-    fontSize: 12,
-    color: '#0d6efd',
-    fontWeight: '600',
-  },
+ 
 
   empty: {
     textAlign: 'center',
