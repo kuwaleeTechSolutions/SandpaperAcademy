@@ -23,7 +23,7 @@ const UserListScreen: React.FC<any> = ({ navigation }) => {
   const fetchUsers = async () => {
     try {
       const res = await api.get('/users');
-      setUsers(res.data.data); // pagination compatible
+      setUsers(res.data.data); // ✅ FIX
     } catch (error) {
       Alert.alert('Error', 'Failed to load users');
     } finally {
@@ -31,6 +31,7 @@ const UserListScreen: React.FC<any> = ({ navigation }) => {
       setRefreshing(false);
     }
   };
+
 
   useEffect(() => {
     fetchUsers();
